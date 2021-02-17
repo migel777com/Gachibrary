@@ -7,7 +7,16 @@
 <body>
     <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
         <label for="name">Enter a new name: </label>
-        <input type="text" th:field="*{name}" id="name" />
+        <input type="text" th:field="*{name}" id="name" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        <input type="text" th:field="*{author}" id="author" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
+        <input type="text" th:field="*{genre}" id="genre" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Error</div>
+        <input type="text" th:field="*{imageURL}" id="imageURL" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}">imageURL Error</div>
+        <input type="text" th:field="*{copies}" id="copies" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}">Copies Error</div>
         <br/>
         <input type="submit" value="Update" />
     </form>

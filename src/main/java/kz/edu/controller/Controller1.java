@@ -5,12 +5,14 @@ import kz.edu.model.Book;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/books")
-public class Controller1
-{
+public class Controller1 {
     private final BookDAO bookDAO;
     @Autowired
     public Controller1(BookDAO bookDAO)
@@ -19,50 +21,49 @@ public class Controller1
     }
 
     @GetMapping()
-    public String helloPage(Model model)
-    {
+    public String helloPage(Model model) {
         model.addAttribute("booksList", bookDAO.getBookList());
         return "page-1";
     }
+
     @GetMapping("/{id}")
-    public String book(@PathVariable("id") int id, Model model)
-    {
+    public String book(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookDAO.getBook(id));
         return "page-2";
     }
+
     @GetMapping("/addBook")
-    public String addBookGet(Model model)
-    {
-        model.addAttribute("book", new Book());
+    public String addBookGet(@ModelAttribute("book") Book book) {
         return "page-3";
     }
+
     @PostMapping()
-    public String addBookPost(@ModelAttribute("book") Book book)
-    {
+    public String addBookPost(@ModelAttribute("book") @Valid Book book,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "page-3";
+
         bookDAO.addBook(book);
         return "redirect:/books/"+book.getId();
     }
+
     @GetMapping("/edit/{id}")
-    public String updateBook(@PathVariable("id") int id, Model model)
-    {
+    public String updateBook(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookDAO.getBook(id));
         return "page-4";
     }
+
     @PatchMapping("/{id}")
-    public String updateBookPatch(@ModelAttribute("book") Book book, @PathVariable("id") int id)
-    {
+    public String updateBookPatch(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "page-4";
+
         bookDAO.updateBook(book);
         return "redirect:/books/"+book.getId();
     }
-    @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") long id, Model model)
-    {
-        model.addAttribute("book", bookDAO.getBook(id));
-        return "page-5";
-    }
+
     @DeleteMapping("/{id}")
-    public String deleteBookPatch(@PathVariable("id") int id)
-    {
+    public String deleteBookPatch(@PathVariable("id") int id) {
         bookDAO.deleteBook(id);
         return "redirect:/books";
     }

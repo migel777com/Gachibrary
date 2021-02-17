@@ -12,8 +12,10 @@
         <tr>
             <td>
                 <input style="width: 100%" type="hidden" name="bookId" value=${book.getId()} />&nbsp;&nbsp;
-                <a th:href="@{/books/delete/{id}(id=${book.getId()})}">Delete Book</a>&nbsp;&nbsp;
                 <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>&nbsp;&nbsp;
+                <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+                    <input type="submit" value="Delete Book" />
+                </form>
             </td>
             <td style="width:40%" rowspan="6"><img th:src="${book.getImageURL()}" width="128px" height="192px" /></td>
         </tr>

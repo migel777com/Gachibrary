@@ -2,16 +2,21 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add</title>
+    <title>Add Book</title>
 </head>
 <body>
-<h1>Add new book</h1>
+<h1>Add New Book</h1>
     <form th:method="post" th:action="@{/books}" th:object="${book}">
         <input type="text" th:field="*{name}" id="name" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         <input type="text" th:field="*{author}" id="author" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
         <input type="text" th:field="*{genre}" id="genre" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Error</div>
         <input type="text" th:field="*{imageURL}" id="imageURL" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}">imageURL Error</div>
         <input type="text" th:field="*{copies}" id="copies" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}">Copies Error</div>
         <input type="submit" value="Add" />
     </form>
     <a th:href="@{/books}">Books</a>

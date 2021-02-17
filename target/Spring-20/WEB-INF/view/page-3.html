@@ -7,6 +7,8 @@
 <body>
 <h1>Add New Book</h1>
     <form th:method="post" th:action="@{/books}" th:object="${book}">
+        <input type="text" th:field="*{id}" id="id" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id Error</div>
         <input type="text" th:field="*{name}" id="name" /><br/>
         <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
         <input type="text" th:field="*{author}" id="author" /><br/>

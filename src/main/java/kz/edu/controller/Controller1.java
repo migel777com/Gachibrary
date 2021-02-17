@@ -43,7 +43,14 @@ public class Controller1 {
         if (bindingResult.hasErrors())
             return "page-3";
 
-        bookDAO.addBook(book);
+        if (bookDAO.getBook(book.getId()) == null) {
+            bookDAO.addBook(book);
+        } else {
+            Book prevBook = bookDAO.getBook(book.getId());
+            int incCopies = book.getCopies() + prevBook.getCopies();
+            bookDAO.incBook(prevBook, incCopies);
+        }
+
         return "redirect:/books/"+book.getId();
     }
 

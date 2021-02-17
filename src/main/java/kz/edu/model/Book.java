@@ -8,10 +8,9 @@ import java.io.Serializable;
 
 @Entity(name = "BookEntity")
 @Table(name = "books")
-public class Book implements Serializable
-{
-    private long id;
-
+public class Book implements Serializable  {
+    @Min(value = 1, message = "ISBN should be greater than 0")
+    private int id;
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
@@ -25,15 +24,16 @@ public class Book implements Serializable
     private String imageURL;
     @Min(value = 0, message = "Copies should be greater than or equal to 0")
     private int copies;
+    private int deleted;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    public long getId()
+    public int getId()
     {
         return this.id;
     }
-    public void setId(long id)
+    public void setId(int id)
     {
         this.id = id;
     }
@@ -69,4 +69,8 @@ public class Book implements Serializable
     @Column(name = "book_copies")
     public int getCopies() { return this.copies; }
     public void setCopies(int copies) { this.copies = copies; }
+
+    @Column(name = "book_deleted")
+    public int isDeleted() { return this.deleted; }
+    public void setDeleted(int deleted) { this.deleted = deleted; }
 }

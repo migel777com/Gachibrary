@@ -1,10 +1,12 @@
 package kz.edu.dao;
 
 import kz.edu.model.Authority;
+import kz.edu.model.Book;
 import kz.edu.model.Role;
 import kz.edu.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -25,6 +28,27 @@ public class UserDAO
     public UserDAO(SessionFactory sessionFactory)
     {
         this.sessionFactory = sessionFactory;
+    }
+
+    public List<User> getUserList() {
+        List<User> usersList;
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        try {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<User> criteria = builder.createQuery(User.class);
+            Root<User> root = criteria.from(User.class);
+
+            //Predicate predicateBook = builder.equal(root.get("active"), 0);
+
+            criteria.select(root);
+            Query<User> query = session.createQuery(criteria);
+            usersList = query.getResultList();
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        return usersList;
     }
 
     public User findByUserName(String username)
@@ -69,6 +93,41 @@ public class UserDAO
             user.setRole(role);
 
             session.persist(user);
+            session.getTransaction().commit();
+        }
+        finally
+        {
+            //session.close();
+        }
+    }
+
+
+    public void updateUser(User user)
+    {
+        try
+        {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.merge(user);
+            session.getTransaction().commit();
+        }
+        finally
+        {
+            //session.close();
+        }
+    }
+    public void deleteUser(String username)
+    {
+        System.out.println("delete " + username);
+        try
+        {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            User user = session.find(User.class, username);
+            System.out.println("The email of the user to be deleted: " + user.getEmail());
+            user.setActive(false);
+            session.merge(user);
+            //session.remove(user);
             session.getTransaction().commit();
         }
         finally

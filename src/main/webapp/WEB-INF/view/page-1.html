@@ -11,8 +11,8 @@
         <table style="border-collapse: collapse; border: 1px solid black; width: 100%" id=${book.getId()}/>
         <tr>
             <td>
-                <input style="width: 100%" type="hidden" name="bookId" value=${book.getId()} />&nbsp;&nbsp;
-                <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>&nbsp;&nbsp;
+                <input style="width: 100%" type="hidden" name="bookId" value="${book.getId()}" />
+                <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>
                 <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
                     <input type="submit" value="Delete Book" />
                 </form>

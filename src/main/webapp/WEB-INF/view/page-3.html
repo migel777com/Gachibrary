@@ -2,25 +2,46 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Book</title>
+    <title>Add a Book</title>
+    <style>
+        #header{
+            display: flex;background-color: #F08A5D;width: 100%;height: 5%;justify-content: space-around;
+        }
+        #header a{
+            color: #F9ED68;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body>
-<h1>Add New Book</h1>
+<body style="margin: 0;background-color: #692B70;">
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a href="/books">Books</a>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:space-around;border: 3px solid #B83A5D;background-color: #8B0C3C;padding: 5%;">
+    <h1 style="color: #F38181;font-size: 40pt;-webkit-text-stroke: 2px rgb(0,0,0);">Add new book</h1>
     <form th:method="post" th:action="@{/books}" th:object="${book}">
         <input type="text" th:field="*{id}" id="id" /><br/>
         <div style="color:red" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id Error</div>
-        <input type="text" th:field="*{name}" id="name" /><br/>
+        <input type="text" th:field="*{name}" id="name" /><span class="stats"> - Name</span><br/>
         <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
-        <input type="text" th:field="*{author}" id="author" /><br/>
+        <input type="text" th:field="*{author}" id="author" /><span class="stats"> - Author</span><br/>
         <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
-        <input type="text" th:field="*{genre}" id="genre" /><br/>
+        <input type="text" th:field="*{genre}" id="genre" /><span class="stats"> - Genre</span><br/>
         <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Error</div>
-        <input type="text" th:field="*{imageURL}" id="imageURL" /><br/>
+        <input type="text" th:field="*{imageURL}" id="imageURL" /><span class="stats"> - Image url</span><br/>
         <div style="color:red" th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}">imageURL Error</div>
-        <input type="text" th:field="*{copies}" id="copies" /><br/>
+        <input type="text" th:field="*{copies}" id="copies" /><span class="stats"> - Copies</span><br/>
         <div style="color:red" th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}">Copies Error</div>
         <input type="submit" value="Add" />
     </form>
-    <a th:href="@{/books}">Books</a>
+</div>
 </body>
 </html>

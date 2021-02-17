@@ -2,6 +2,7 @@ package kz.edu.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
@@ -10,10 +11,15 @@ import java.io.Serializable;
 public class User implements Serializable
 {
     private long user_id;
-    //@NotEmpty(message = "Email should not be empty")
-    //@Email(message = "Email should be valid")
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
     private String email;
+
+    @NotEmpty(message = "Password should not be empty")
+    @Min(value = 6,message = "Password size should be greater than 6 characters")
     private String password;
+
+    @NotEmpty(message = "Role should not be empty")
     private Role role;
     private Boolean active = true;
 

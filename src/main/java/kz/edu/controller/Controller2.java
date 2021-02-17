@@ -47,17 +47,19 @@ public class Controller2
         return "registration";
     }
     @PostMapping("/registration")
-    public String addUser(User user, @RequestParam("username") String email, Model model)
-    {
-        System.out.println("REGISTRATION:"+email);
 
-        if (userDAO.findByUserName(email) != null)
-        {
+    public String addUser(User user, @RequestParam("username") String email, Model model) {
+        System.out.println("REGISTRATION:" + email);
+
+        if (userDAO.findByUserName(email) != null && userDAO.findByUserName(email).isActive()) {
             model.addAttribute("message", "User exists!");
             return "registration";
-        }
-        else
-        {
+        } else if (userDAO.findByUserName(email) != null && !userDAO.findByUserName(email).isActive()) {
+            User usertemp = userDAO.findByUserName(email);
+            usertemp.setActive(true);
+            userDAO.updateUser(usertemp);
+            return "home";
+        } else {
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userDAO.addUser(user);

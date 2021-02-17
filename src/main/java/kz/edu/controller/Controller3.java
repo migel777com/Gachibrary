@@ -1,6 +1,7 @@
 package kz.edu.controller;
 
 import kz.edu.dao.UserDAO;
+import kz.edu.model.Book;
 import kz.edu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,21 +21,27 @@ public class Controller3 {
     }
 
     @GetMapping()
-    public String helloPage(Model model) {
+    public String userList(Model model) {
         model.addAttribute("usersList", userDAO.getUserList());
-        return "page-1";
+        return "user-list";
+    }
+
+    @GetMapping("/{username}")
+    public String book(@PathVariable("username") String username, Model model) {
+        model.addAttribute("user", userDAO.findByUserName(username));
+        return "user-page";
     }
 
     @GetMapping("/edit/{username}")
     public String updateUser(@PathVariable("username") String username, Model model) {
         model.addAttribute("user", userDAO.findByUserName(username));
-        return "";
+        return "user-edit";
     }
 
     @PatchMapping("/{username}")
     public String updateUserPatch(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable("username") String username) {
         if (bindingResult.hasErrors())
-            return "";
+            return "user-edit";
 
         userDAO.updateUser(user);
         return "redirect:/users/"+user.getEmail();

@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Spring-19" />
         <module name="Spring-20" />
+        <module name="Gachibrary" />
       </profile>
     </annotationProcessing>
   </component>

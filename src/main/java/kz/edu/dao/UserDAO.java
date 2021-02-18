@@ -90,7 +90,6 @@ public class UserDAO {
         }
     }
 
-
     public void updateUser(User user) {
         try {
             Session session = sessionFactory.openSession();

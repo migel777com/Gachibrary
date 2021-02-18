@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a th:href="@{/registration}">Add New User</a>
+</div>
+<h1>List of Students:</h1>
+<hr>
+<div th:each="user:${usersList}">
+    <p style="margin-bottom:0;">Email:</p>
+    <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+    <p style="margin-bottom:0;">Name:</p>
+    <input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+    <p style="margin-bottom:0;">Active Status:</p>
+    <input type="text" name="active" placeholder="status" readonly  th:value="${user.isActive()}" /><br/><br/>
+    <a th:href="@{/users/{username}(username=${user.getEmail()})}">Profile Link</a><br/>
+    <hr>
+</div>
+</body>
+</html>
+
+<!-- <a th:href="/users/{id}(id=${user.getEmail()})">Profile Link</a><br/> -->

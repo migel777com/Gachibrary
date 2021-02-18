@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Add New User</title>
 </head>
 <body>
-<h1>Sign Up</h1>
-<p th:text="${message}">message</p>
+<h1>Add New User</h1>
+<p style="color:red" th:text="${message}">message</p>
 <form action="/registration" method="post">
     <div><label> User Name : <input type="text" name="username"/><br><br></label></div>
     <div><label> Password: <input type="password" name="password"/><br><br></label></div>
@@ -14,8 +14,6 @@
     <div><input type="submit" value="Sign Up"/></div>
 </form>
 <br>
-<a href="/home">Home</a>
-<br>
-<a href="/login">Sign In</a>
+<a href="/users">Users List</a>
 </body>
 </html>

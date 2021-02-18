@@ -43,14 +43,22 @@ public class Controller1 {
         if (bindingResult.hasErrors())
             return "page-3";
 
+        System.out.println(book.getId()+" "+book.getName()+" "+
+                book.getAuthor()+" "+book.getGenre()+" "+book.getImageURL()+" "+
+                book.getCopies());
+
         if (bookDAO.getBook(book.getId()) == null) {
+            book.setDeleted(0);
             bookDAO.addBook(book);
+        } else if (bookDAO.getBook(book.getId()).isDeleted() == 1) {
+            Book prevBook = bookDAO.getBook(book.getId());
+            prevBook.setDeleted(0);
+            bookDAO.updateBook(prevBook);
         } else {
             Book prevBook = bookDAO.getBook(book.getId());
             int incCopies = book.getCopies() + prevBook.getCopies();
             bookDAO.incBook(prevBook, incCopies);
         }
-
         return "redirect:/books/"+book.getId();
     }
 

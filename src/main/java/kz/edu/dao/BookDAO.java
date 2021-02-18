@@ -70,7 +70,7 @@ public class BookDAO {
         return json;
     }
 */
-    public Book getBook(long id) {
+    public Book getBook(int id) {
         session = sessionFactory.openSession();
         session.beginTransaction();
         Book book;
@@ -104,7 +104,7 @@ public class BookDAO {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.persist(book);
+            session.save(book);
             session.getTransaction().commit();
         } finally {
             session.close();
@@ -122,7 +122,7 @@ public class BookDAO {
         }
     }
 
-    public void deleteBook(long bookId) {
+    public void deleteBook(int bookId) {
         System.out.println("delete " + bookId);
         try {
             session = sessionFactory.openSession();

@@ -51,9 +51,8 @@ public class Controller1 {
             book.setDeleted(0);
             bookDAO.addBook(book);
         } else if (bookDAO.getBook(book.getId()).isDeleted() == 1) {
-            Book prevBook = bookDAO.getBook(book.getId());
-            prevBook.setDeleted(0);
-            bookDAO.updateBook(prevBook);
+            book.setDeleted(0);
+            bookDAO.updateBook(book);
         } else {
             Book prevBook = bookDAO.getBook(book.getId());
             int incCopies = book.getCopies() + prevBook.getCopies();

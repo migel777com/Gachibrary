@@ -31,7 +31,6 @@ public class Book implements Serializable  {
     private int deleted;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     public int getId()
     {

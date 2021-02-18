@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -82,6 +83,8 @@ public class BookDAO {
             Predicate predicateBook = builder.equal(root.get("id"), id);
             book = session.createQuery(q1.where(predicateBook)).getSingleResult();
             session.getTransaction().commit();
+        } catch (NoResultException noResultException) {
+            book = null;
         } finally {
             session.close();
         }

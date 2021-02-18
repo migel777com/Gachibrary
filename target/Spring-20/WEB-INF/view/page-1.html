@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Select All</title>
+    <title>All Books</title>
     <link rel="stylesheet" href="style.css">
     <style>
         #header{
@@ -18,6 +18,17 @@
             color: #F38181;
             text-decoration: none;
             font-weight: bold;
+            margin-right:10px;
+        }
+        #buttonAsLink {
+            color: #F38181;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            font-family: "Times New Roman";
+            font-size: 16px;
+            padding: 0;
         }
         .stats{
             color: #F9ED68;
@@ -34,18 +45,20 @@
 <div id="header">
     <a href="/logout">Log Out</a>
     <a href="/home">Home</a>
-    <a th:href="@{/books/addBook}">Add A New Book</a>
+    <a th:href="@{/books/addBook}">Add New Book</a>
 </div>
 <div style="display: grid;grid-template-columns: auto auto auto;">
     <div th:each="book:${booksList}" style="border: 3px solid #B83A5D;background-color: #8B0C3C;padding: 5%;">
         <table style="width: 100%;" id=${book.getId()}/>
             <tr>
                 <td class="actions">
-                    <input style="width: 100%" type="hidden" name="bookId" value=${book.getId()} />
-                    <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>
-                    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
-                        <input type="submit" value="Delete Book" />
-                    </form>
+                    <div style="display:flex;flex-direction:row;">
+                        <input style="width: 100%" type="hidden" name="bookId" value=${book.getId()} />
+                        <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>
+                        <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+                            <input id="buttonAsLink" type="submit" value="Delete Book" />
+                        </form>
+                    </div>
                 </td>
                 <td style="width:40%" rowspan="6"><img th:src="${book.getImageURL()}" width="178px" height="242px" /></td>
             </tr>

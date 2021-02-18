@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>List of Students:</h1>
+<div th:each="user:${usersList}">
+    <div>
+        <p>Email:</p>
+        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" />
+        </br>
+        <p>Name:</p>
+        <input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" />
+    </div>
+    <br/>
+</div>
+</body>
+</html>

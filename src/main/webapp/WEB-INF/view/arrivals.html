@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Arrivals</title>
@@ -8,14 +8,16 @@
     <h1>Book Arrivals</h1>
     <a href="/logout">Log Out</a>
     <br>
-    <a href="/books" >Books</a>
+    <a href="/home">Home</a>
     <br>
-    <a href="/login">Sign In</a>
-    <br>
-    <a href="/registration">Sign Up</a>
-    <br>
-    <a href="/profile">Profile</a>
-    <br>
-    <a href="/arrivals">Arrivals</a>
+    <div th:each="action:${actionList}">
+        <p style="margin-bottom:0;">Id:</p>
+        <input type="text" name="action_id" placeholder="action_id" readonly th:value="${action.getAction_id()}" /><br/>
+        <p style="margin-bottom:0;">Message:</p>
+        <input type="text" name="action_message" placeholder="action_message" readonly th:value="${action.getAction_message()}" /><br/>
+        <p style="margin-bottom:0;">Time:</p>
+        <input type="text" name="createTime" placeholder="createTime" readonly th:value="${action.getCreateTime()}" /><br/>
+        <hr>
+    </div>
 </body>
 </html>

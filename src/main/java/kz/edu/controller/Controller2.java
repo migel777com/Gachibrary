@@ -1,9 +1,8 @@
 package kz.edu.controller;
 
-import kz.edu.dao.BookDAO;
+import kz.edu.dao.ActionsDAO;
 import kz.edu.dao.BorrowingDAO;
 import kz.edu.dao.UserDAO;
-import kz.edu.model.Role;
 import kz.edu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,11 +19,15 @@ import org.springframework.web.bind.annotation.*;
 public class Controller2 {
     private final UserDAO userDAO;
     private final BorrowingDAO borrowingDAO;
+    private final ActionsDAO actionsDAO;
     @Autowired
     public Controller2(@Qualifier("userDAO") UserDAO userDAO,
-                       @Qualifier("borrowingDAO") BorrowingDAO borrowingDAO) {
+                       @Qualifier("borrowingDAO") BorrowingDAO borrowingDAO,
+                       @Qualifier("actionsDAO") ActionsDAO actionsDAO) {
         this.userDAO = userDAO;
-        this.borrowingDAO = borrowingDAO;}
+        this.borrowingDAO = borrowingDAO;
+        this.actionsDAO = actionsDAO;
+    }
 
     PasswordEncoder passwordEncoder;
 
@@ -39,8 +41,9 @@ public class Controller2 {
     }
 
     @GetMapping("/arrivals")
-    public String arrivals()
+    public String arrivals(Model model)
     {
+        model.addAttribute("actionList", actionsDAO.getAllActions());
         return "arrivals";
     }
 

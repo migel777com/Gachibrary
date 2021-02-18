@@ -8,7 +8,7 @@ import java.security.Timestamp;
 public class Action {
     private int action_id;
     private String action_message;
-    private Timestamp createTime;
+    private String createTime;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,6 @@ public class Action {
     public void setAction_message(String action_message) { this.action_message = action_message; }
 
     @Column(name = "createTime")
-    public Timestamp getCreateTime() { return createTime; }
-    public void setCreateTime(Timestamp createTime) { this.createTime = createTime; }
+    public String getCreateTime() { return createTime; }
+    public void setCreateTime(String createTime) { this.createTime = createTime; }
 }

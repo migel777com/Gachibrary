@@ -13,6 +13,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -27,7 +29,7 @@ public class ActionsDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public List<Action> getAllActions(User user) {
+    public List<Action> getAllActions() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         try {
@@ -42,6 +44,14 @@ public class ActionsDAO {
         } finally {
             session.close();
         }
+
+        Collections.sort(actionList, new Comparator<Action>() {
+            @Override
+            public int compare(Action o1, Action o2) {
+                return o1.getCreateTime().compareTo(o2.getCreateTime());
+            }
+        });
+
         return actionList;
     }
 

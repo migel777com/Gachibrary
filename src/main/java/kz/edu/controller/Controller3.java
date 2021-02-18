@@ -100,6 +100,7 @@ public class Controller3 {
         book.setCopies(copies-1);
         bookDAO.updateBook(book);
 
+        System.out.println("Action start");
         Action action = new Action();
         action.setAction_message("User "+ userDAO.findByUserId(borrowing.getUser_id()).getId()+" took book with isbn="+book.getId());
         actionsDAO.addAction(action);

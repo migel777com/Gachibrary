@@ -58,12 +58,13 @@ public class Controller2 {
         System.out.println("REGISTRATION:" + email);
 
         if (userDAO.findByUserName(email) != null && userDAO.findByUserName(email).isActive()) {
-            model.addAttribute("message", "User exists!");
+            model.addAttribute("message", "User with such email exists!");
             return "registration";
+            // Пароль ввести надо
         } else if (userDAO.findByUserName(email) != null && !userDAO.findByUserName(email).isActive()) {
-            User usertemp = userDAO.findByUserName(email);
-            usertemp.setActive(true);
-            userDAO.updateUser(usertemp);
+            User userTemp = userDAO.findByUserName(email);
+            userTemp.setActive(true);
+            userDAO.updateUser(userTemp);
             return "home";
         } else {
             user.setEmail(email);

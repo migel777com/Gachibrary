@@ -70,23 +70,28 @@ public class UserDAO {
         return user;
     }
 
+    public Role returnRole(String roleString) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        CriteriaBuilder builder1 = session.getCriteriaBuilder();
+        CriteriaQuery<Role> q1 = builder1.createQuery(Role.class);
+        Root<Role> root1 = q1.from(Role.class);
+
+        Predicate predicateRole = builder1.equal(root1.get("name"), roleString);
+        //Predicate predicateRole = builder1.equal(root1.get("name"), "ROLE_ADMIN");
+        Role role = session.createQuery(q1.where(predicateRole)).getSingleResult();
+        return role;
+    }
+
     public void addUser(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         try {
-            CriteriaBuilder builder1 = session.getCriteriaBuilder();
-            CriteriaQuery<Role> q1 = builder1.createQuery(Role.class);
-            Root<Role> root1 = q1.from(Role.class);
-
-            Predicate predicateRole = builder1.equal(root1.get("name"), "ROLE_USER");
-            //Predicate predicateRole = builder1.equal(root1.get("name"), "ROLE_ADMIN");
-            Role role = session.createQuery(q1.where(predicateRole)).getSingleResult();
-            user.setRole(role);
-
+            user.setRole(returnRole("ROLE_USER"));
             session.persist(user);
             session.getTransaction().commit();
         } finally {
-            //session.close();
+            session.close();
         }
     }
 
@@ -94,6 +99,7 @@ public class UserDAO {
         try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
+            user.setRole(returnRole("ROLE_USER"));
             session.merge(user);
             session.getTransaction().commit();
         } finally {

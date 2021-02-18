@@ -16,6 +16,9 @@ public class User implements Serializable {
     @Email(message = "Email should be valid")
     private String email;
 
+    @NotEmpty(message = "Name should not be empty")
+    private String name;
+
     @NotEmpty(message = "Password should not be empty")
     @Min(value = 6,message = "Password size should be greater than 6 characters")
     private String password;
@@ -52,6 +55,16 @@ public class User implements Serializable {
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    @Column(name = "name")
+    public String getName()
+    {
+        return this.name;
+    }
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

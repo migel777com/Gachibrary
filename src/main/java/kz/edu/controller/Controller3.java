@@ -1,7 +1,6 @@
 package kz.edu.controller;
 
 import kz.edu.dao.UserDAO;
-import kz.edu.model.Book;
 import kz.edu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +19,12 @@ public class Controller3 {
         this.userDAO = userDAO;
     }
 
+    // Login => Need to add exception for Login of inactive Users
+
     @GetMapping()
     public String userList(Model model) {
         model.addAttribute("usersList", userDAO.getUserList());
-        return "user-list";
+        return "users-list";
     }
 
     @GetMapping("/{username}")

@@ -1,6 +1,7 @@
 package kz.edu.controller;
 
 import kz.edu.dao.UserDAO;
+import kz.edu.model.Role;
 import kz.edu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,7 +69,7 @@ public class Controller2 {
             user.setEmail(email);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userDAO.addUser(user);
-            return "redirect:/login";
+            return "redirect:/home";
         }
     }
 

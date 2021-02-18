@@ -2,27 +2,34 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>User Profile</title>
 </head>
 <body>
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a th:href="@{/users}">Users List</a>
+</div>
 <div>
     <h1>- User Info -</h1>
-    <p th:text="${user.getEmail()}">VALUE</p>
-    <p th:text="${user.getRole()}">VALUE</p>
-
-    <a th:href="@{/user-list}">Books</a>
-    <a th:href="@{/user-list/user-edit/{id}(id=${user.getEmail()})}">Edit User</a>
-    <form th:method="DELETE" th:action="@{/user-list/{id}(id=${user.getEmail()})}" th:object="${user}">
+    <p style="margin-bottom:0;">Email:</p>
+    <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+    <p style="margin-bottom:0;">Name:</p>
+    <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+    <p style="margin-bottom:0;">Role:</p>
+    <input type="text" name="role" placeholder="Role" readonly  th:value="${user.getRole()}" /><br/><br/>
+    <a th:href="@{/users/edit/{username}(username=${user.getEmail()})}">Edit User</a>
+    <form th:method="DELETE" th:action="@{/users/{username}(username=${user.getEmail()})}" th:object="${user}">
         <input type="submit" value="Delete User" />
     </form>
 </div>
+<hr>
 <div>
     <h1>- Books List -</h1>
-
 </div>
+<hr>
 <div>
     <h1>- User Actions -</h1>
-
 </div>
 </body>
 </html>

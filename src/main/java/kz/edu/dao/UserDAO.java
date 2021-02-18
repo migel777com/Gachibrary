@@ -37,9 +37,9 @@ public class UserDAO {
             CriteriaQuery<User> criteria = builder.createQuery(User.class);
             Root<User> root = criteria.from(User.class);
 
-            //Predicate predicateBook = builder.equal(root.get("active"), 0);
+            Predicate predicateUser = builder.equal(root.get("role"), 1);
 
-            criteria.select(root);
+            criteria.select(root).where(predicateUser);;
             Query<User> query = session.createQuery(criteria);
             usersList = query.getResultList();
             session.getTransaction().commit();

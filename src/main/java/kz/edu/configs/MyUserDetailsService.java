@@ -31,8 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
         kz.edu.model.User user = userDAO.findByUserName(username);
         System.out.println("role   : "+user.getRole().getName());
         Set<Authority> authoritySet = user.getRole().getAuthorities();
-        for(Authority authority: authoritySet)
-        {
+        for(Authority authority: authoritySet) {
             System.out.println("authority   : "+authority.getName());
         }
         System.out.println("email  : "+user.getEmail());
@@ -40,8 +39,7 @@ public class MyUserDetailsService implements UserDetailsService {
         Set<Authority> authorities = role.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        for (Authority authority : authorities)
-        {
+        for (Authority authority : authorities) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getName());
             grantedAuthorities.add( grantedAuthority );
         }

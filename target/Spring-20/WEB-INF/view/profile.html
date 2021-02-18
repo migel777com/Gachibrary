@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -8,14 +8,14 @@
     <h1>User Profile</h1>
     <a href="/logout">Log Out</a>
     <br>
-    <a href="/books" >Books</a>
-    <br>
-    <a href="/login">Sign In</a>
-    <br>
-    <a href="/registration">Sign Up</a>
-    <br>
-    <a href="/profile">Profile</a>
-    <br>
-    <a href="/arrivals">Arrivals</a>
+    <a href="/home" >Home</a>
+    <div>
+        <p style="margin-bottom:0;">Email:</p>
+        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+        <p style="margin-bottom:0;">Name:</p>
+        <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+    </div>
+    <hr>
+
 </body>
 </html>

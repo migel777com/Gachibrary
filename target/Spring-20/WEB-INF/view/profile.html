@@ -17,17 +17,9 @@
     </div>
     <hr>
     <div>
-        <h1>- User Info -</h1>
-        <p style="margin-bottom:0;">Email:</p>
-        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
-        <p style="margin-bottom:0;">Name:</p>
-        <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
-        <hr>
-        <div>
-            <h1>- Books List -</h1><br>
-            <div th:each="borrowing:${borrowingList}">
-                <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
-            </div>
+        <h1>- Books List -</h1><br>
+        <div th:each="borrowing:${borrowingList}">
+            <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
         </div>
     </div>
 </body>

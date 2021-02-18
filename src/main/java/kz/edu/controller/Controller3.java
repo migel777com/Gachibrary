@@ -64,7 +64,13 @@ public class Controller3 {
 
     @DeleteMapping("/{id}")
     public String deleteUserPatch(@PathVariable("id") int id) {
-        userDAO.deleteUser(id);
+        User user = userDAO.findByUserId(id);
+        System.out.println(borrowingDAO.getTakenBookList(user).isEmpty());
+        if (borrowingDAO.getTakenBookList(user).isEmpty()) {
+            userDAO.deleteUser(id);
+        } else {
+            System.out.println("User cannot be deleted");
+        }
         return "redirect:/users";
     }
 

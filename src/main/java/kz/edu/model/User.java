@@ -20,10 +20,9 @@ public class User implements Serializable {
     private String name;
 
     @NotEmpty(message = "Password should not be empty")
-    @Min(value = 6,message = "Password size should be greater than 6 characters")
     private String password;
 
-    @NotEmpty(message = "Role should not be empty")
+
     private Role role;
     private Boolean active = true;
 

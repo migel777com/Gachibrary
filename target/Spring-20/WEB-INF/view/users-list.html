@@ -15,8 +15,6 @@
 <div th:each="user:${usersList}">
     <p style="margin-bottom:0;">Email:</p>
     <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
-    <p style="margin-bottom:0;">Name:</p>
-    <input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
     <p style="margin-bottom:0;">Active Status:</p>
     <input type="text" name="active" placeholder="status" readonly  th:value="${user.isActive()}" /><br/><br/>
     <a th:href="@{/users/{username}(username=${user.getEmail()})}">Profile Link</a><br/>

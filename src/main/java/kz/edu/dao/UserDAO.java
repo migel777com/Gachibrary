@@ -39,7 +39,7 @@ public class UserDAO {
 
             Predicate predicateUser = builder.equal(root.get("role"), 1);
 
-            criteria.select(root).where(predicateUser);;
+            criteria.select(root).where(predicateUser);
             Query<User> query = session.createQuery(criteria);
             usersList = query.getResultList();
             session.getTransaction().commit();
@@ -87,7 +87,15 @@ public class UserDAO {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         try {
-            user.setRole(returnRole("ROLE_USER"));
+            CriteriaBuilder builder1 = session.getCriteriaBuilder();
+            CriteriaQuery<Role> q1 = builder1.createQuery(Role.class);
+            Root<Role> root1 = q1.from(Role.class);
+
+            Predicate predicateRole = builder1.equal(root1.get("name"), "ROLE_USER");
+            //Predicate predicateRole = builder1.equal(root1.get("name"), "ROLE_ADMIN");
+            Role role = session.createQuery(q1.where(predicateRole)).getSingleResult();
+            user.setRole(role);
+
             session.persist(user);
             session.getTransaction().commit();
         } finally {

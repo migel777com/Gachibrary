@@ -16,6 +16,11 @@
         <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
     </div>
     <hr>
-
+    <div>
+        <h1>- Books List -</h1><br>
+        <div th:each="borrowing:${borrowingList}">
+            <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
+        </div>
+    </div>
 </body>
 </html>

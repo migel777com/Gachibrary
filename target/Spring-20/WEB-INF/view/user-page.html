@@ -27,6 +27,16 @@
 <hr>
 <div>
     <h1>- Books List -</h1>
+    <form th:method="PUT" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${borrowing}">
+        <input type="text" name="book_id" placeholder="book id" th:field="*{book_id}" /><br/>
+        <input type="submit" value="Add Book" />
+    </form>
+    <div th:each="borrowing:${borrowingList}">
+        <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
+        <form th:method="DELETE" th:action="@{/users/{id1}/{id2}(id1=${user.getId()}, id2=${borrowing.getId()})}" th:object="${borrowing}">
+            <input type="submit" value="Return Book" />
+        </form>
+    </div>
 </div>
 <hr>
 <div>

@@ -38,6 +38,14 @@
             width: 80%;
             padding-bottom: 2px;
         }
+        }
+        body{
+            margin: 0;
+            background-color: #692B70;
+        }
+        #grid-box{
+            display: grid;grid-template-columns: auto auto auto;
+        }
     </style>
 </head>
 <body style="margin: 0;background-color: #692B70;">
@@ -46,7 +54,7 @@
     <a href="/home">Home</a>
     <a th:href="@{/books/addBook}">Add New Book</a>
 </div>
-<div style="display: grid;grid-template-columns: auto auto auto;">
+<div id="grid-box">
     <div th:each="book:${booksList}" style="border: 3px solid #B83A5D;background-color: #8B0C3C;padding: 5%;">
         <table style="width: 100%;" id=${book.getId()}/>
             <tr>

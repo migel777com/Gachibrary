@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Gachibrary" />
         <module name="Spring-20" />
         <module name="Spring-19" />
+        <module name="Gachibrary-clone" />
+        <module name="Gachibrary" />
       </profile>
     </annotationProcessing>
   </component>

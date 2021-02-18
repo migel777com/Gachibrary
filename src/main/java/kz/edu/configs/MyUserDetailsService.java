@@ -18,18 +18,15 @@ import kz.edu.dao.UserDAO;
 import kz.edu.model.Role;
 
 @Service("userDetailsService")
-public class MyUserDetailsService implements UserDetailsService
-{
-    //get user from the database, via Hibernate
+public class MyUserDetailsService implements UserDetailsService {
+    // Get user from the database, via Hibernate
     private UserDAO userDAO;
     @Autowired
-    public void setUserDAO(UserDAO userDAO)
-    {this.userDAO = userDAO;}
+    public void setUserDAO(UserDAO userDAO) {this.userDAO = userDAO;}
 
     @Override
     @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException
-    {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         System.out.println("loadUserByUsername:"+username);
         kz.edu.model.User user = userDAO.findByUserName(username);
         System.out.println("role   : "+user.getRole().getName());
@@ -57,8 +54,7 @@ public class MyUserDetailsService implements UserDetailsService
 
     // Converts kz.edu.model.User user to
     // org.springframework.security.core.userdetails.User
-    private User buildUserForAuthentication(kz.edu.model.User user, List<GrantedAuthority> authorities)
-    {
+    private User buildUserForAuthentication(kz.edu.model.User user, List<GrantedAuthority> authorities) {
         return new User(user.getEmail(), user.getPassword(),true, true, true, true, authorities);
     }
 }

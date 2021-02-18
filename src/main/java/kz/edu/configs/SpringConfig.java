@@ -21,8 +21,7 @@ import java.util.Properties;
 @ComponentScan("kz.edu")
 @EnableTransactionManagement
 @EnableWebMvc
-public class SpringConfig implements WebMvcConfigurer
-{
+public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
     @Autowired
@@ -31,8 +30,7 @@ public class SpringConfig implements WebMvcConfigurer
     }
 
     @Bean
-    public SpringResourceTemplateResolver templateResolver()
-    {
+    public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/view/");
@@ -41,8 +39,7 @@ public class SpringConfig implements WebMvcConfigurer
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine()
-    {
+    public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
@@ -50,16 +47,14 @@ public class SpringConfig implements WebMvcConfigurer
     }
 
     @Override
-    public void configureViewResolvers(ViewResolverRegistry registry)
-    {
+    public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory()
-    {
+    public LocalSessionFactoryBean sessionFactory() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLInnoDBDialect");
         hibernateProperties.setProperty("hibernate.connection.datasource", "java:/comp/env/jdbc/db");
@@ -70,8 +65,7 @@ public class SpringConfig implements WebMvcConfigurer
     }
 
     @Bean
-    public HibernateTransactionManager txManager()
-    {
+    public HibernateTransactionManager txManager() {
         HibernateTransactionManager htm = new HibernateTransactionManager();
         SessionFactory sf = sessionFactory().getObject();
         htm.setSessionFactory(sf);

@@ -7,8 +7,7 @@ import java.util.Set;
 
 @Entity(name = "AuthorityEntity")
 @Table(name = "authorities")
-public class Authority implements Serializable
-{
+public class Authority implements Serializable {
     private long authority_id;
     private String authority_name;
     private Set<Role> roles = new HashSet<>();
@@ -38,5 +37,4 @@ public class Authority implements Serializable
     @ManyToMany(mappedBy = "authorities", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Role> getRoles() { return roles; }
     public void setRoles(Set<Role> roles) { this.roles = roles;}
-
 }

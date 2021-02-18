@@ -8,9 +8,10 @@ import java.io.Serializable;
 
 @Entity(name = "UserEntity")
 @Table(name = "users")
-public class User implements Serializable
-{
+public class User implements Serializable {
+
     private long user_id;
+
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     private String email;
@@ -73,5 +74,4 @@ public class User implements Serializable
     {
         this.active = active;
     }
-
 }

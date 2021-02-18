@@ -9,21 +9,28 @@ import java.io.Serializable;
 @Entity(name = "BookEntity")
 @Table(name = "books")
 public class Book implements Serializable  {
+
     @Min(value = 1, message = "ISBN should be greater than 0")
     private int id;
+
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
+
     @NotEmpty(message = "Author should not be empty")
     @Size(min = 2, max = 30, message = "Author should be between 2 and 30 characters")
     private String author;
+
     @NotEmpty(message = "Genre should not be empty")
     @Size(min = 2, max = 30, message = "Genre should be between 2 and 30 characters")
     private String genre;
+
     @NotEmpty(message = "imageURL should not be empty")
     private String imageURL;
+
     @Min(value = 0, message = "Copies should be greater than or equal to 0")
     private int copies;
+
     private int deleted;
 
     @Id

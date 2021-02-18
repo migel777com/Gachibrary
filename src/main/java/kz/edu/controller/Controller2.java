@@ -11,43 +11,48 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-public class Controller2
-{
+public class Controller2 {
     private final UserDAO userDAO;
+
     @Autowired
-    public Controller2(UserDAO userDAO)
-    { this.userDAO = userDAO;}
+    public Controller2(UserDAO userDAO) { this.userDAO = userDAO;}
+
     PasswordEncoder passwordEncoder;
+
     @Autowired
-    public void PasswordEncoder(PasswordEncoder passwordEncoder)
-    { this.passwordEncoder = passwordEncoder;}
+    public void PasswordEncoder(PasswordEncoder passwordEncoder) { this.passwordEncoder = passwordEncoder;}
+
     @RequestMapping(value={"", "/", "home"})
     public String home()
     {
         return "home";
     }
+
     @GetMapping("/arrivals")
     public String arrivals()
     {
         return "arrivals";
     }
+
     @GetMapping("/profile")
     public String profile()
     {
         return "profile";
     }
+
     @GetMapping("/login")
     public String login()
     {
         return "login";
     }
+
     @GetMapping("/registration")
     public String registration()
     {
         return "registration";
     }
-    @PostMapping("/registration")
 
+    @PostMapping("/registration")
     public String addUser(User user, @RequestParam("username") String email, Model model) {
         System.out.println("REGISTRATION:" + email);
 

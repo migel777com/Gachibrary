@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -20,8 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public class UserDAO
-{
+public class UserDAO {
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -51,13 +49,11 @@ public class UserDAO
         return usersList;
     }
 
-    public User findByUserName(String username)
-    {
+    public User findByUserName(String username) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         User user;
-        try
-        {
+        try {
             CriteriaBuilder builder1 = session.getCriteriaBuilder();
             CriteriaQuery<User> q1 = builder1.createQuery(User.class);
             Root<User> root1 = q1.from(User.class);
@@ -66,23 +62,18 @@ public class UserDAO
             user = session.createQuery(q1.where(predicateUsername)).getSingleResult();
             //System.out.println("available authorities:"+user.getRole().getAuthorities());
             //System.out.println("USER DAO. Email:"+user.getEmail()+". Role: "+user.getRole().getId()+". Password: "+user.getPassword());
-        }
-        catch (NoResultException noResultException)
-        {
+        } catch (NoResultException noResultException) {
             user = null;
-        }
-        finally
-        {
+        } finally {
             //session.close();
         }
         return user;
     }
-    public void addUser(User user)
-    {
+
+    public void addUser(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        try
-        {
+        try {
             CriteriaBuilder builder1 = session.getCriteriaBuilder();
             CriteriaQuery<Role> q1 = builder1.createQuery(Role.class);
             Root<Role> root1 = q1.from(Role.class);
@@ -94,33 +85,26 @@ public class UserDAO
 
             session.persist(user);
             session.getTransaction().commit();
-        }
-        finally
-        {
+        } finally {
             //session.close();
         }
     }
 
 
-    public void updateUser(User user)
-    {
-        try
-        {
+    public void updateUser(User user) {
+        try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             session.merge(user);
             session.getTransaction().commit();
-        }
-        finally
-        {
+        } finally {
             //session.close();
         }
     }
-    public void deleteUser(String username)
-    {
+
+    public void deleteUser(String username) {
         System.out.println("delete " + username);
-        try
-        {
+        try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             User user = session.find(User.class, username);
@@ -129,9 +113,7 @@ public class UserDAO
             session.merge(user);
             //session.remove(user);
             session.getTransaction().commit();
-        }
-        finally
-        {
+        } finally {
             //session.close();
         }
     }

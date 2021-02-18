@@ -7,11 +7,11 @@ import java.util.Set;
 
 @Entity(name = "RoleEntity")
 @Table(name = "roles")
-public class Role implements Serializable
-{
+public class Role implements Serializable {
     private long role_id;
     private String name;
     private Set<Authority> authorities = new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
@@ -39,8 +39,6 @@ public class Role implements Serializable
             joinColumns = @JoinColumn(name="role_id"),
             inverseJoinColumns = @JoinColumn(name="authority_id")
         )
-    public Set<Authority> getAuthorities()
-    { return authorities; }
-    public void setAuthorities(Set<Authority> authorities)
-    { this.authorities = authorities; }
+    public Set<Authority> getAuthorities() { return authorities; }
+    public void setAuthorities(Set<Authority> authorities) { this.authorities = authorities; }
 }

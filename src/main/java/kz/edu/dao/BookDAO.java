@@ -16,14 +16,17 @@ import java.util.List;
 
 @Component
 public class BookDAO {
+
     private SessionFactory sessionFactory;
     Session session;
     List<Book> booksList;
+
     @Autowired
     public BookDAO(SessionFactory sessionFactory)
     {
         this.sessionFactory = sessionFactory;
     }
+
     public List<Book> getBookList() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();

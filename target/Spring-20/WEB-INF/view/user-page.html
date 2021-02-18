@@ -19,8 +19,8 @@
     <p style="margin-bottom:0;">Role:</p>
     <input type="text" name="role" placeholder="Role" readonly  th:value="${user.getRole().getName()}" /><br/><br/>
     <div style="display:flex;flex-direction:row;">
-    <a style="color:black;margin-right:10px;text-decoration:none;" th:href="@{/users/edit/{username}(username=${user.getEmail()})}">Edit User</a>
-    <form th:method="DELETE" th:action="@{/users/{username}(username=${user.getEmail()})}" th:object="${user}">
+    <a style="color:black;margin-right:10px;text-decoration:none;" th:href="@{/users/edit/{id}(id=${user.getId()})}">Edit User</a>
+    <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
         <input style="cursor: pointer;font-family: Times New Roman;font-size:16px;border:none;background:transparent;padding:0;" type="submit" value="Delete User" />
     </form>
 </div>
@@ -31,6 +31,7 @@
 <hr>
 <div>
     <h1>- User Actions -</h1>
+</div>
 </div>
 </body>
 </html>

@@ -64,7 +64,7 @@ public class Controller2 {
         } else if (userDAO.findByUserName(email) != null && !userDAO.findByUserName(email).isActive()) {
             User userTemp = userDAO.findByUserName(email);
             userTemp.setActive(true);
-            userDAO.updateUser(userTemp);
+            userDAO.recreateUser(userTemp);
             return "home";
         } else {
             user.setEmail(email);

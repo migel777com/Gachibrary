@@ -1,8 +1,10 @@
 package kz.edu.controller;
 
+import kz.edu.dao.ActionsDAO;
 import kz.edu.dao.BookDAO;
 import kz.edu.dao.BorrowingDAO;
 import kz.edu.dao.UserDAO;
+import kz.edu.model.Action;
 import kz.edu.model.Book;
 import kz.edu.model.Borrowing;
 import kz.edu.model.User;
@@ -24,13 +26,16 @@ public class Controller3 {
     private final UserDAO userDAO;
     private final BorrowingDAO borrowingDAO;
     private final BookDAO bookDAO;
+    private final ActionsDAO actionsDAO;
     @Autowired
     public Controller3(@Qualifier("userDAO") UserDAO userDAO,
                        @Qualifier("borrowingDAO") BorrowingDAO borrowingDAO,
-                       @Qualifier("bookDAO") BookDAO bookDAO) {
+                       @Qualifier("bookDAO") BookDAO bookDAO,
+                       @Qualifier("actionsDAO") ActionsDAO actionsDAO) {
         this.userDAO = userDAO;
         this.borrowingDAO = borrowingDAO;
         this.bookDAO = bookDAO;
+        this.actionsDAO = actionsDAO;
     }
 
     @GetMapping()
@@ -95,6 +100,10 @@ public class Controller3 {
         book.setCopies(copies-1);
         bookDAO.updateBook(book);
 
+        Action action = new Action();
+        action.setAction_message("User "+ userDAO.findByUserId(borrowing.getUser_id()).getId()+" took book with isbn="+book.getId());
+        actionsDAO.addAction(action);
+
         return "redirect:/users/"+id;
     }
 
@@ -109,6 +118,10 @@ public class Controller3 {
         int copies = book.getCopies();
         book.setCopies(copies+1);
         bookDAO.updateBook(book);
+
+        Action action = new Action();
+        action.setAction_message("User "+ userDAO.findByUserId(borrowing.getUser_id()).getId()+" retrieved book with isbn="+book.getId());
+        actionsDAO.addAction(action);
 
         return "redirect:/users/"+id1;
     }

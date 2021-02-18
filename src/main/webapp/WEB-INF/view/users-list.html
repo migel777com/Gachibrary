@@ -3,6 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #header{
+            display: flex;background-color: #F08A5D;width: 100%;height: 5%;justify-content: space-around;
+        }
+        #header a{
+            color: #F9ED68;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #F38181;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        .stats{
+            color: #B83A5D;
+            font-weight: bold;
+            margin-bottom:0;
+        }
+        body{
+            margin: 0;
+            background-color: #692B70;
+        }
+        #h{
+            text-align: center;color: antiquewhite; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        #grid-box{
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            padding-left: 10%;
+            padding-right: 10%;
+            grid-gap: 10px;
+        }
+        #box{
+            background-color: #F08A5D;border-radius: 25px;padding-left: 25%;
+        }
+        #box input{
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
 <div id="header">
@@ -10,17 +53,17 @@
     <a href="/home">Home</a>
     <a th:href="@{/registration}">Add New User</a>
 </div>
-<h1>List of Students:</h1>
-<hr>
-<div th:each="user:${usersList}">
-    <p style="margin-bottom:0;">Name:</p>
-    <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
-    <p style="margin-bottom:0;">Email:</p>
-    <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
-    <p style="margin-bottom:0;">Active Status:</p>
-    <input type="text" name="active" placeholder="status" readonly  th:value="${user.isActive()}" /><br/><br/>
-    <a th:href="@{/users/{id}(id=${user.getId()})}">Profile Link</a><br/>
-    <hr>
+<h1 id="h">List of Students:</h1>
+<div  id="grid-box">
+    <div id="box" th:each="user:${usersList}">
+        <p class="stats">Email:</p>
+        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+        <p class="stats">Name:</p>
+        <input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+        <p class="stats">Active Status:</p>
+        <input type="text" name="active" placeholder="status" readonly  th:value="${user.isActive()}" /><br/><br/>
+        <a style="text-decoration: none;color: #F9ED68;" th:href="@{/users/{id}(id=${user.getId()})}">Profile Link</a><br/>
+    </div>
 </div>
 </body>
 </html>

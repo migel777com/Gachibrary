@@ -62,22 +62,22 @@
     </style>
 </head>
 <body>
-    <h1 class="h">User Profile</h1>
+<div id="header">
     <a href="/logout">Log Out</a>
-    <br>
-    <a href="/home" >Home</a>
-    <div>
-        <p style="margin-bottom:0;">Email:</p>
-        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
-        <p style="margin-bottom:0;">Name:</p>
-        <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+    <a href="/home">Home</a>
+</div>
+<div class="flex-box">
+    <p class="stats">Email:</p>
+    <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+    <p class="stats">Name:</p>
+    <input type="text" name="name" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+</div>
+<hr>
+<div class="flex-box">
+    <h1 class="h">Books List</h1><br>
+    <div th:each="borrowing:${borrowingList}">
+        <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
     </div>
-    <hr>
-    <div>
-        <h1 class="h">Books List</h1><br>
-        <div th:each="borrowing:${borrowingList}">
-            <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
-        </div>
-    </div>
+</div>
 </body>
 </html>

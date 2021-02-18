@@ -9,6 +9,7 @@
         <module name="Spring-20" />
         <module name="Spring-19" />
         <module name="Gachibrary-clone" />
+        <module name="Gachibrary-cloneNumberTwo" />
         <module name="Gachibrary" />
       </profile>
     </annotationProcessing>

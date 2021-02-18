@@ -3,21 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Arrivals</title>
+    <style>
+        #header{
+            display: flex;background-color: #F08A5D;width: 100%;height: 5%;justify-content: space-around;
+        }
+        #header a{
+            color: #F9ED68;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #F38181;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        #buttonAsLink {
+            color: #F38181;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            font-family: "Times New Roman";
+            font-size: 16px;
+            padding: 0;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+            font-size: 2vw;
+            margin: 0;
+        }
+        .inputs{
+            width: 80%;
+            padding-bottom: 2px;
+        }
+        .h{
+            text-align: center;color: antiquewhite; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        body{
+            margin: 0;
+            background-color: #692B70;
+        }
+        .flex-box{
+            display: flex;flex-direction: column;padding-left: 10%;padding-right: 10%;
+        }
+        .flex-box input{
+            font-size: 2vw;
+            background-color: #B83A5D;color: #F9ED68;
+        }
+        .text{
+            color: #F9ED68;
+            font-size: 4vw;
+            -webkit-text-stroke: 1px rgb(0,0,0);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Book Arrivals</h1>
+<div id="header">
     <a href="/logout">Log Out</a>
-    <br>
     <a href="/home">Home</a>
-    <br>
-    <div th:each="action:${actionList}">
-        <p style="margin-bottom:0;">Id:</p>
-        <input type="text" name="action_id" placeholder="action_id" readonly th:value="${action.getAction_id()}" /><br/>
-        <p style="margin-bottom:0;">Message:</p>
-        <input type="text" name="action_message" placeholder="action_message" readonly th:value="${action.getAction_message()}" /><br/>
-        <p style="margin-bottom:0;">Time:</p>
-        <input type="text" name="createTime" placeholder="createTime" readonly th:value="${action.getCreateTime()}" /><br/>
-        <hr>
-    </div>
+</div>
+<h1 class="h">Book Arrivals</h1>
+<div class="flex-box" th:each="action:${actionList}">
+    <p class="stats">Id:</p>
+    <input type="text" name="action_id" placeholder="action_id" readonly th:value="${action.getAction_id()}" /><br/>
+    <p class="stats">Message:</p>
+    <input type="text" name="action_message" placeholder="action_message" readonly th:value="${action.getAction_message()}" /><br/>
+    <p class="stats">Time:</p>
+    <input type="text" name="createTime" placeholder="createTime" readonly th:value="${action.getCreateTime()}" /><br/>
+    <hr>
+</div>
 </body>
 </html>
